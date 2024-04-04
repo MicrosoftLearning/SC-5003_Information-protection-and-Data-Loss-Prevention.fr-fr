@@ -27,7 +27,7 @@ Votre tâche consiste à créer un type d’informations sensibles personnalisé
 1. Dans la page **Nommer votre type d’informations sensibles**, donnez à votre type d’informations sensibles un **Nom** et une **Description** explicites, puis sélectionnez **Suivant**.
 1. Dans la page **Définir des modèles pour ce type d’informations sensibles**, sélectionnez **Créer un modèle**.
 1. Dans la page **Nouveau modèle**, sélectionnez **+ Ajouter un élément principal** > **Expression régulière**.
-1. Dans la **page Ajouter une expression régulière**, donnez à l’expression régulière un nom explicite pour **ID**, puis entrez `\d{3}-[a-zA-Z]{5}` dans le champ d’**Expression régulière** pour prendre en charge l’exigence de l’organisation. Sélectionnez **Terminé** lorsque vous avez terminé.
+1. Dans la **page Ajouter une expression régulière**, donnez à l’expression régulière un nom explicite pour **ID**, puis entrez `\d{3}-[a-zA-Z]{5}` dans le champ **Expression régulière** pour prendre en charge l’exigence de l’organisation. Sélectionnez **Terminé** lorsque vous avez terminé.
 1. De retour dans la page **Nouveau modèle**, sous **Éléments pris en charge**, sélectionnez **+ Ajouter des éléments ou un groupe d’éléments pris en charge** > **Liste de mots clés**.
 1. Dans la page **Ajouter une liste de mots clés**, donnez un **ID** explicite à votre liste de mots clés. Dans **Groupe de mots clés n° 1** sous **Insensible à la casse**, entrez :
    - `Employee ID`

@@ -4,40 +4,69 @@ lab:
   exercise: Exercise 1 - Create a custom sensitive information type
 ---
 
-## Locataires WWL - Conditions d’utilisation
+# Tâche de renforcement des compétences
 
-Si un locataire vous est fourni dans le cadre d’une formation dispensée par un instructeur, notez qu’il est mis à votre disposition dans le seul but de prendre en charge les labos pratiques de la formation.
+Votre tâche consiste à créer et à publier des étiquettes de confidentialité au sein de votre organisation qui classifient et protègent les données sensibles en fonction de leur niveau de confidentialité et des contrôles d’accès nécessaires.
 
-Vous ne devez ni partager ni utiliser les locataires en dehors des labos pratiques. Le locataire utilisé dans ce cours est un locataire d’essai. Au terme de la classe, le locataire ne pourra pas faire l’objet d’une prolongation et vous ne pourrez plus l’utiliser ni y accéder.
+**Tâche** :
 
-Vous n’êtes pas autorisé à convertir un locataire en abonnement payant. Les locataires obtenus dans le cadre de ce cours sont la propriété de Microsoft Corporation. Nous nous réservons le droit d’y accéder et d’en reprendre possession à tout moment.
+- Créer un type d’informations sensibles personnalisé
 
-# Tâches d'apprentissage
+## Tâche - Créer un type d’informations sensibles personnalisé
 
-Votre tâche consiste à créer un type d’informations sensibles personnalisé (SIT) qui respecte les critères requis :
+Dans cette tâche, vous allez créer un nouveau type d’informations sensibles personnalisé qui reconnaît le modèle des ID d’employés via les mots clés « Employé » et « ID ».
 
-- **Modèle d’expression régulière pour l’ID des employés** : Incluez un modèle d’expression régulière qui identifie la configuration d’ID unique des employés, comptant 9 caractères, de votre organisation : 3 chiffres et un tiret suivis de 5 lettres (par exemple, 123-abcde).
-- **Liste de mots clés associés aux ID des employés** : Incorporez une liste de mots clés couramment associés aux ID des employés pour améliorer l’exactitude de la détection.
+1. Dans **Microsoft Edge**, accédez à **`https://purview.microsoft.com`** et connectez-vous au portail Microsoft Purview en tant que l’utilisateur que vous avez désigné en tant qu’**administrateur de conformité** lors d’une tâche précédente.
 
-## Tâche 1 : créer un type d’informations sensibles
+1. Dans la barre latérale de gauche, sélectionnez **Solutions**, puis **Protection des données**.
 
-1. Accédez au portail de conformité Microsoft Purview.
-1. Développez **Classification de données**, puis sélectionnez **Classifieurs**.
-1. Sélectionnez **Types d’informations sensibles**, puis **+ Créer un type d’informations sensibles**.
-1. Dans la page **Nommer votre type d’informations sensibles**, donnez à votre type d’informations sensibles un **Nom** et une **Description** explicites, puis sélectionnez **Suivant**.
+1. Dans la barre latérale de gauche, développez **Classificateurs**, puis sélectionnez **Types d’informations sensibles**.
+
+1. Sur la page **Types d’informations sensibles**, sélectionnez **+ Créer un type d’informations sensibles** pour démarrer la configuration du type d’informations sensibles.
+
+1. Sur la page **Nommer votre type d’informations sensibles**, saisissez :
+
+    - **Nom :** `Contoso Employee IDs`
+    - **Description** : `Pattern for Contoso employee IDs.`
+
+1. Cliquez sur **Suivant**.
+
 1. Dans la page **Définir des modèles pour ce type d’informations sensibles**, sélectionnez **Créer un modèle**.
-1. Dans la page **Nouveau modèle**, sélectionnez **+ Ajouter un élément principal** > **Expression régulière**.
-1. Dans la **page Ajouter une expression régulière**, donnez à l’expression régulière un nom explicite pour **ID**, puis entrez `\d{3}-[a-zA-Z]{5}` dans le champ **Expression régulière** pour prendre en charge l’exigence de l’organisation. Sélectionnez **Terminé** lorsque vous avez terminé.
-1. De retour dans la page **Nouveau modèle**, sous **Éléments pris en charge**, sélectionnez **+ Ajouter des éléments ou un groupe d’éléments pris en charge** > **Liste de mots clés**.
-1. Dans la page **Ajouter une liste de mots clés**, donnez un **ID** explicite à votre liste de mots clés. Dans **Groupe de mots clés n° 1** sous **Insensible à la casse**, entrez :
-   - `Employee ID`
-   - `Staff number`
-   - `Work ID`
-1. Sélectionnez **Terminé** lorsque vous avez terminé.
-1. De retour dans la page **Nouveau modèle**, sélectionnez **Créer**.
-1. Sélectionnez **Suivant** dans la page **Définir des modèles pour ce type d’informations sensibles**.
-1. Dans la page **Choisir le niveau de confiance recommandé à afficher dans les stratégies de conformité**, laissez la valeur par défaut sélectionnée, puis sélectionnez **Suivant**.
-1. Passez en revue vos paramètres, puis sélectionnez **Créer**.
-1. Dans la page **Votre type d’informations sensibles est créé**, sélectionnez **Terminé**.
 
-Vous avez maintenant correctement créé un type d’informations sensibles (SIT) personnalisé pour améliorer la sécurité et la gestion des numéros uniques des ID des employés de votre entreprise.
+1. Dans le panneau volant **Nouveau modèle** à droite, sélectionnez **+ Ajouter un élément principal** > **Expression régulière**.
+
+1. À droite, dans le panneau volant **+ Ajouter une expression régulière**, saisissez :
+
+    - **ID** : `Contoso IDs`
+    - **Expression régulière** : `[A-Z]{3}[0-9]{6}`
+    - Sélectionnez la case d’option * Correspondance de chaîne*
+
+1. Sélectionnez **Terminé** au bas du panneau volant.
+
+1. De retour sur le panneau volant **Nouveau modèle**, dans **Éléments complémentaires**, sélectionnez le menu déroulant **+ Ajouter des éléments ou un groupe d’éléments complémentaires**, puis sélectionnez **Liste de mots clés**.
+
+1. À droite, dans le panneau volant **Ajouter une liste de mots clés**, saisissez :
+
+    - **ID** : `Employee ID keywords`
+    - **Insensible à la casse :**
+
+       ```text
+       Employee
+       ID
+       ```
+
+    - Sélectionnez la case d’option *Correspondance des mots*
+
+1. Sélectionnez **Terminé** au bas du panneau volant.
+
+1. De retour sur le panneau volant **Nouveau modèle**, dans **Proximité des caractères**, réduisez la valeur **Détecter les éléments principaux ET complémentaires** à `100` caractères.
+
+1. Sélectionnez le bouton **Créer** au bas du panneau volant.
+
+1. De retour sur la page **Définir des modèles pour ce type d’informations sensibles**, sélectionnez **Suivant**.
+
+1. Sur la page **Choisir le niveau de confiance recommandé à afficher dans les stratégies de conformité**, utilisez la valeur par défaut, puis sélectionnez **Suivant**.
+
+1. À la page **Vérifier les paramètres et terminer**, passez en revue les paramètres, puis sélectionnez **Créer**. Une fois la création réussie, sélectionnez **Terminé**.
+
+Vous avez créé un nouveau type d’informations sensibles pour identifier les ID d’employés suivant le modèle de trois caractères majuscules, six nombres et les mots clés « Employé » ou « ID » dans une plage de 100 caractères.

@@ -19,8 +19,8 @@ Dans ce labo, vous allez configurer et préparer votre environnement pour les t�
 **Tâches :**
 
 - Activer l’audit dans le portail Microsoft Purview
-- Activer la recherche par nom dans Microsoft Teams
-- Activer les cloisonnements d’informations dans SharePoint Online et OneDrive.
+- Attribuer des rôles de conformité
+- Explorer le portail Microsoft Purview
 
 ## Tâche - Activer l’audit dans le portail Microsoft Purview
 

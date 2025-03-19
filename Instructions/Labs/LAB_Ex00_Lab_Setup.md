@@ -40,6 +40,19 @@ Dans cette tâche, vous allez activer l’audit dans le portail Microsoft Purvie
 
 1. Après que vous avez sélectionné cette option, la barre bleue doit disparaître de cette page.
 
+>[ !alert] Si vous recevez une erreur lors de l’activation de l’audit dans cet exercice, procédez comme suit :
+>1. Ouvrez une fenêtre Terminal élevée en sélectionnant le bouton Windows avec le bouton droit de la souris, puis sélectionnez Terminal (Admin).
+>1. Installez le module ExchangeOnlineManagement en exécutant `Install-Module -Name ExchangeOnlineManagement`.
+>1. Connectez-vous à ExchangeOnlineManagement en exécutant `Connect-ExchangeOnline`.
+>1. Lorsque vous y êtes invité, connectez-vous en entrant le nom d’utilisateur de l’administrateur et le mot de passe de votre fournisseur d’hébergement de labo.
+>1. Pour vérifier si l’audit est activé, exécutez `Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled`.
+>1. Si la valeur est false, le journal d’audit est désactivé.
+>1. Pour l’activer, exécutez `Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true`.
+>   1. Si vous recevez une erreur indiquant que vous ne parvenez pas à exécuter le script dans votre organisation, exécutez `Enable-OrganizationCustomization`.
+>   1. Réessayez d’exécuter `Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true`.
+>1. Pour confirmer que l’audit est activé, exécutez `Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled`.
+>1. Une fois terminé, exécutez `Disconnect-ExchangeOnline` pour mettre fin à votre session.
+
 Vous avez activé l’audit dans Microsoft 365.
 
 ## Tâche - Attribuer des rôles de conformité

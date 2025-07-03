@@ -17,71 +17,19 @@ Votre tâche consiste à créer et à publier des étiquettes de confidentialit�
 
 ## Tâche 1 - Activer la prise en charge des étiquettes de confidentialité dans SharePoint et OneDrive
 
-Dans cette tâche, vous allez installer les modules nécessaires et activer la prise en charge des étiquettes de confidentialité dans votre locataire. Cela est nécessaire pour la tâche facultative qui consiste à appliquer des étiquettes de confidentialité, plus loin dans cet exercice.
+Dans cette tâche, vous allez activer la co-création pour les étiquettes de confidentialité, ce qui active également les étiquettes de confidentialité pour les fichiers dans SharePoint et OneDrive.
 
-1. Sur le bureau, ouvrez une fenêtre PowerShell à privilèges élevés en cliquant avec le bouton droit sur le bouton Windows dans la barre des tâches, puis sélectionnez **Terminal (admin)**.
+1. Ouvrez **Microsoft Edge** et accédez à `https://purview.microsoft.com`.
 
-1. Dans la fenêtre **Contrôle de compte d’utilisateur**, confirmez en cliquant sur **Oui**.
+1. Dans le volet de navigation gauche, sélectionnez **Paramètres** > **Protection des données**.
 
-1. Exécutez le cmdlet **Install-Module** pour installer la dernière version du module PowerShell MS Online :
+1. Dans les **paramètres Protection des données**, vérifiez que vous êtes sur l’onglet **Co-édition de fichiers avec des étiquettes de confidentialité**.
 
-    ```powershell
-    Install-Module -Name MSOnline
-    ```
+1. Cochez la case pour **Activer la co-édition des fichiers avec des étiquettes de confidentialité**.
 
-1. Confirmez la boîte de dialogue de sécurité Nuget et la boîte de dialogue de sécurité du référentiel non approuvé en appuyant sur **Y** pour Oui, puis appuyez sur Entrée. Ce processus peut prendre un certain temps.
+1. Sélectionner **Appliquer** en bas de l’écran.
 
-1. Exécutez le cmdlet **Install-Module** pour installer la dernière version du module PowerShell SharePoint Online :
-
-    ```powershell
-    Install-Module -Name Microsoft.Online.SharePoint.PowerShell
-    ```
-
-1. Confirmez la boîte de dialogue de sécurité du référentiel non approuvé en appuyant sur **Y** pour Oui, puis appuyez sur Entrée.
-
-1. Exécutez **Connect-MsolService** pour vous connecter au service MS Online :
-
-    ```powershell
-    Connect-MsolService
-    ```
-
-1. Dans le formulaire **Se connecter à votre compte**, connectez-vous en tant que l’utilisateur que vous avez désigné comme **administrateur de conformité** dans un exercice précédent.
-
-1. Une fois connecté, revenez à la fenêtre du terminal.
-
-1. Exécutez le cmdlet **Get-Msoldomain** et enregistrez le domaine en tant que variable :
-
-    ```powershell
-    $domain = get-msoldomain
-    ```
-
-1. Utilisez la variable _$domain_ créée lors de l’étape précédente pour créer une variable pour _$adminurl_ :
-
-    ```powershell
-    $adminurl = "https://" + $domain.Name.split('.')[0] + "-admin.sharepoint.com"
-    ```
-
-1. Exécutez le cmdlet **Connect-SPOService** en utilisant la variable _$adminurl_ créée lors de l’étape précédente :
-
-    ```powershell
-    Connect-SPOService -url $adminurl
-    ```
-
-1. Dans le formulaire **Se connecter à votre compte**, connectez-vous en tant qu’**administrateur général**.
-
-1. Une fois connecté, revenez à la fenêtre du terminal.
-
-1. Exécutez le cmdlet **Set-SPOTenant** pour activer la prise en charge des étiquettes de confidentialité :
-
-    ```powershell
-    Set-SPOTenant -EnableAIPIntegration $true
-    ```
-
-1. Confirmez les modifications en appuyant sur **Y** pour Oui, puis appuyez sur Entrée.
-
-1. Fermez la fenêtre PowerShell.
-
-Vous avez activé la prise en charge des étiquettes de confidentialité pour les sites Teams et SharePoint.
+Vous avez activé la prise en charge des étiquettes de confidentialité pour les fichiers SharePoint et OneDrive.
 
 ## Tâche 2 - Créer des étiquettes de confidentialité
 

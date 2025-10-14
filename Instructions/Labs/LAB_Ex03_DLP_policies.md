@@ -114,6 +114,14 @@ Dans cette tâche, vous allez utiliser PowerShell pour créer une stratégie DLP
 
 1. Sur votre bureau, ouvrez une fenêtre PowerShell à privilèges élevés en cliquant avec le bouton droit sur le bouton Windows dans la barre des tâches, puis en sélectionnant **Terminal (admin)**.
 
+1. Exécutez le cmdlet **Install Module** pour installer la dernière version du module **Exchange Online PowerShell** :
+
+    ```powershell
+    Install-Module ExchangeOnlineManagement
+    ```
+
+1. Confirmez la boîte de dialogue de sécurité du référentiel non approuvé en appuyant sur **Y** pour Oui, puis appuyez sur **Entrée**.  Ce processus peut prendre un certain temps.
+
 1. Exécutez le cmdlet **Connect-IPPSSession** pour vous connecter au PowerShell de Sécurité et conformité :
 
    ```powershell

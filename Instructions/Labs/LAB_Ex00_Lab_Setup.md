@@ -24,34 +24,79 @@ Dans ce labo, vous allez configurer et préparer votre environnement pour les t�
 
 ## Tâche - Activer l’audit dans le portail Microsoft Purview
 
-Dans cette tâche, vous allez activer l’audit dans le portail Microsoft Purview pour surveiller les activités du portail. Pour les exercices de ces laboratoires, l’audit est nécessaire pour créer une stratégie d’étiquetage automatique.
+Dans cette tâche, vous allez activer l’audit dans le portail Microsoft Purview pour surveiller les activités du portail.
 
-1. Dans Microsoft Edge, accédez au portail Microsoft Purview, `https://purview.microsoft.com`, et connectez-vous en tant qu’utilisateur disposant de droits d’**administrateur général**.
+1. Connectez-vous à la machine virtuelle Client 1 (SC-401-CL1) avec le compte**Administrateur**.
 
-1. Un message à propos du nouveau portail Microsoft Purview s’affiche à l’écran. Sélectionnez l’option permettant d’accepter les conditions de divulgation de flux de données et la déclaration de confidentialité, puis sélectionnez **Essayer maintenant**.
+1. Ouvrez Microsoft Edge.
+
+1. Dans**Microsoft Edge**, accédez à`https://purview.microsoft.com` et connectez-vous en tant que**Administrateur MOD**,`admin@WWLxZZZZZZ.onmicrosoft.com` (où ZZZZZZ est votre préfixe de locataire unique fourni par votre fournisseur d’hébergement de labo). Le mot de passe d’administrateur doit être fourni par l’hébergeur de votre labo.
+
+1. Dans Microsoft Edge, accédez au portail Microsoft Purview,`https://purview.microsoft.com`, et connectez-vous.
+
+1. Un message à propos du nouveau portail Microsoft Purview s’affiche à l’écran. Sélectionnez**Démarrer** pour accéder au nouveau portail.
 
     ![Capture d’écran de l’écran Bienvenue sur le nouveau portail de conformité Microsoft Purview.](../Media/welcome-purview-portal.png)
 
-1. Sélectionnez **Solutions** dans la barre latérale de gauche, puis **Audit**.
+1. Sélectionnez**Solutions** dans la barre latérale de gauche, puis**Audit**.
 
-1. Sur la page **Recherche**, sélectionnez la barre **Démarrer l’enregistrement de l’activité des utilisateurs et des administrateurs** pour activer la journalisation d’audit.
+1. Sur la page**Recherche**, sélectionnez la barre**Démarrer l’enregistrement de l’activité des utilisateurs et des administrateurs** pour activer la journalisation d’audit.
 
     ![Capture d’écran montrant le bouton Démarrer l’enregistrement de l’activité des utilisateurs et des administrateurs.](../Media/enable-audit-button.png)
 
 1. Après que vous avez sélectionné cette option, la barre bleue doit disparaître de cette page.
 
->[ !alert] Si vous recevez une erreur lors de l’activation de l’audit dans cet exercice, procédez comme suit :
->1. Ouvrez une fenêtre Terminal élevée en sélectionnant le bouton Windows avec le bouton droit de la souris, puis sélectionnez Terminal (Admin).
->1. Installez le module ExchangeOnlineManagement en exécutant `Install-Module -Name ExchangeOnlineManagement`.
->1. Connectez-vous à ExchangeOnlineManagement en exécutant `Connect-ExchangeOnline`.
->1. Lorsque vous y êtes invité, connectez-vous en entrant le nom d’utilisateur de l’administrateur et le mot de passe de votre fournisseur d’hébergement de labo.
->1. Pour vérifier si l’audit est activé, exécutez `Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled`.
->1. Si la valeur est false, le journal d’audit est désactivé.
->1. Pour l’activer, exécutez `Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true`.
->   1. Si vous recevez une erreur indiquant que vous ne parvenez pas à exécuter le script dans votre organisation, exécutez `Enable-OrganizationCustomization`.
->   1. Réessayez d’exécuter `Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true`.
->1. Pour confirmer que l’audit est activé, exécutez `Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled`.
->1. Une fois terminé, exécutez `Disconnect-ExchangeOnline` pour mettre fin à votre session.
+    >[!Note] **Remarque : Si le bouton Audit n’active pas la journalisation**
+    >
+    >Dans certains locataires, la sélection de**Démarrer l’enregistrement de l’activité des utilisateurs et des administrateurs** peut ne pas activer Audit.  
+    >
+    >Si cela se produit, vous pouvez activer Audit via PowerShell à la place :
+    >
+    >1. Ouvrez une fenêtre Terminal à privilèges élevés en faisant un clic droit sur le bouton Windows et en sélectionnant**Terminal (Administrateur)**.  
+    >
+    >1. Installez le dernier module**Exchange Online PowerShell** :
+    >
+    >     ```powershell
+    >     Install-Module ExchangeOnlineManagement
+    >     ```
+    >
+    >     Confirmez tous les prompts en tapant**Y** pour Oui et en appuyant sur**Entrée**.
+    >
+    >1. Exécutez la commande suivante pour modifier votre stratégie d’exécution :
+    >
+    >     ```powershell
+    >     Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+    >     ```
+    >
+    >1. Fermez la fenêtre Terminal avec élévation de privilèges et ouvrez une session PowerShell classique.
+    >
+    >1. Connectez-vous à Exchange Online :
+    >
+    >     ```powershell
+    >     Connect-ExchangeOnline
+    >     ```
+    >
+    >    Connectez-vous en tant que`admin@WWLxZZZZZZ.onmicrosoft.com` (où ZZZZZZ est votre préfixe de locataire unique fourni par votre fournisseur d’hébergement de labo). Le mot de passe d’administrateur doit être fourni par l’hébergeur de votre labo.
+    >
+    >1. Vérifiez si Audit est activé :
+    >
+    >     ```powershell
+    >     Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled
+    >     ```
+    >
+    >    Si le résultat indique**_False_**, activez Audit :
+    >
+    >     ```powershell
+    >     Set-AdminAuditLogConfig -UnifiedAuditLogIngestionEnabled $true
+    >     ```
+    >
+    >1. Vérifiez qu’il est désormais activé :
+    >
+    >     ```powershell
+    >     Get-AdminAuditLogConfig | FL UnifiedAuditLogIngestionEnabled
+    >     ```
+    >
+    >    La commande doit renvoyer**_True_** une fois Audit actif.
 
 Vous avez activé l’audit dans Microsoft 365.
 
@@ -59,9 +104,9 @@ Vous avez activé l’audit dans Microsoft 365.
 
 Dans cette tâche, vous allez attribuer le rôle d’**administrateur de conformité** à l’utilisateur que vous utiliserez pour ces exercices de labo.
 
-1. Ouvrez **Microsoft Edge** et accédez au centre d’administration Microsoft 365, `https://admin.microsoft.com`. Vous devez vous connecter en tant qu’utilisateur disposant de droits d’**administrateur général**.
+1. Ouvrez**Microsoft Edge** et accédez au centre d’administration Microsoft 365,`https://admin.microsoft.com`. Vous devez vous connecter en tant qu’utilisateur disposant de droits d’**administrateur général**.
 
-1. Développez **Utilisateurs** dans la barre latérale de gauche, puis sélectionnez **Utilisateurs actifs**.
+1. Développez**Utilisateurs** dans la barre latérale de gauche, puis sélectionnez**Utilisateurs actifs**.
 
 1. Sélectionnez ou créez un utilisateur pour poursuivre ces exercices de labo.
 
@@ -69,9 +114,9 @@ Dans cette tâche, vous allez attribuer le rôle d’**administrateur de conform
 
    1. Si vous créez un nouvel utilisateur, attribuez à l’utilisateur une licence qui convient à ces exercices de labo. L’utilisateur doit disposer d’une licence Microsoft 365 E5 ou d’un module complémentaire compatible pour réaliser ces exercices. Attribuez à l’utilisateur le rôle d’**administrateur de conformité** dans les paramètres facultatifs de la configuration du nouvel utilisateur et finalisez la création du nouvel utilisateur.
 
-   1. Si vous modifiez l’accès d’un utilisateur existant, sélectionnez l’utilisateur, puis **Gérer les rôles**. Attribuez à l’utilisateur le rôle d’**administrateur de conformité** et enregistrez vos modifications.
+   1. Si vous modifiez l’accès d’un utilisateur existant, sélectionnez l’utilisateur, puis**Gérer les rôles**. Attribuez à l’utilisateur le rôle d’**administrateur de conformité** et enregistrez vos modifications.
 
-1. Déconnectez-vous du compte avec l’accès d’administrateur général en sélectionnant son icône d’utilisateur en haut à droite, puis sélectionnez **Se déconnecter**.
+1. Déconnectez-vous du compte avec l’accès d’administrateur général en sélectionnant son icône d’utilisateur en haut à droite, puis sélectionnez**Se déconnecter**.
 
    Exemple :
 
@@ -81,13 +126,13 @@ Vous avez attribué à un utilisateur le rôle d’**administrateur de conformit
 
 ## Tâche - Explorer le portail Microsoft Purview
 
-Dans cette tâche, vous allez vous connecter en tant que l’utilisateur auquel vous avez précédemment accordé le rôle d’**administrateur de conformité** afin d’explorer le portail Microsoft Purview. Ce rôle sera appelé **administrateur de conformité** dans les laboratoires et les exercices suivants.
+Dans cette tâche, vous allez vous connecter en tant que l’utilisateur auquel vous avez précédemment accordé le rôle d’**administrateur de conformité** afin d’explorer le portail Microsoft Purview. Ce rôle sera appelé**administrateur de conformité** dans les laboratoires et les exercices suivants.
 
-1. Dans **Microsoft Edge**, accédez à **`https://purview.microsoft.com`**.
+1. Dans**Microsoft Edge**, accédez à**`https://purview.microsoft.com`**.
 
-1. Dans la fenêtre **Choisir un compte** qui s’affiche, sélectionnez **Utiliser un autre compte**.
+1. Dans la fenêtre**Choisir un compte** qui s’affiche, sélectionnez**Utiliser un autre compte**.
 
-1. Lorsque la fenêtre **Se connecter** s’affiche, connectez-vous en tant que l’utilisateur que vous aviez précédemment désigné comme **administrateur de conformité**.
+1. Lorsque la fenêtre**Se connecter** s’affiche, connectez-vous en tant que l’utilisateur que vous aviez précédemment désigné comme**administrateur de conformité**.
 
 1. Familiarisez-vous avec le portail de conformité Microsoft Purview. Lorsque vous avez terminé, laissez la fenêtre du navigateur ouverte.
 
